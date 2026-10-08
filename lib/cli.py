@@ -2,7 +2,6 @@ import argparse
 import os
 import sys
 
-from . import __version__
 from .config import GAIN_DB, MEDIA_EXTS, SPLICE_MP3, ffmpeg
 from .probe import probe_media
 from .detect import breath_probabilities, detect
@@ -93,7 +92,6 @@ def collect_inputs(path):
 def main():
     ap = argparse.ArgumentParser(prog="debreath", description="Remove breaths from a video or audio file. Video is copied bit-for-bit; live audio is copied bit-for-bit (only breath frames are re-encoded).")
     ap.add_argument("input", help="input media file or folder (with -r)")
-    ap.add_argument("--version", action="version", version="debreath " + __version__)
     ap.add_argument("-r", "--recursive", action="store_true",
                     help="process every supported file in a folder, recursively")
     ap.add_argument("-v", "--verbose", action="store_true",

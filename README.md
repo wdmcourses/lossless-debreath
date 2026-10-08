@@ -12,13 +12,17 @@ Remove breaths (inhalations) from audio and video. The video is copied as-is; on
 ## Supported formats
 
 - **Video** - any container (MOV, MP4, MKV, WebM and similar); the video is copied as-is.
-- **Audio** - MP3, WAV/PCM, FLAC, ALAC, AAC, Opus (WebM/Ogg).
+- **Audio** - MP3, WAV/PCM, FLAC, ALAC, AAC, Opus.
 
 MP3, WAV, FLAC and ALAC stay bit-for-bit identical outside the breaths. For AAC and Opus the difference next to a breath is inaudible.
 
 Unsupported audio codecs are refused.
 
 ## Usage
+
+Download the latest release for your platform from
+[Releases](https://github.com/wdmcourses/lossless-debreath/releases/latest),
+extract it, then run:
 
 ```
 debreath <file>
@@ -45,7 +49,7 @@ debreath -r recordings/
 | `-v` | off | Print every detected breath region. |
 | `-l DB` | `30` | How much to lower the breaths, in dB. |
 
-Tip: add this folder to your PATH to run `debreath` from anywhere.
+Tip (Windows): add this folder to your PATH to run `debreath` from anywhere.
 
 ## Requirements
 
