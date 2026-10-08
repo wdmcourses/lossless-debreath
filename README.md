@@ -48,7 +48,7 @@ To change how much the breaths are lowered:
 debreath interview.mov -l 20
 ```
 
-To make the detection more sensitive (lower threshold, wider regions):
+To make the detection more sensitive (lower threshold, more is lowered):
 
 ```
 debreath interview.mov -t 0.5
