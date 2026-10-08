@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 
-from .config import GAIN_DB, MEDIA_EXTS, SPLICE_MP3, ffmpeg
+from .config import GAIN_DB, MEDIA_EXTS, SPLICE_MP3, THRESHOLD, ffmpeg
 from .probe import probe_media
 from .detect import breath_probabilities, detect
 from .containers import default_output, unique_output
@@ -14,7 +14,7 @@ def fmt_time(t):
     return "%.3f" % t
 
 
-def run_file(path, gain_db, verbose=False, detail=True):
+def run_file(path, gain_db, verbose=False, detail=True, threshold=THRESHOLD):
     probe = probe_media(path)
     streams = probe.get("streams", [])
     vstream = next((s for s in streams if s.get("codec_type") == "video"), None)
@@ -45,7 +45,7 @@ def run_file(path, gain_db, verbose=False, detail=True):
         probs, rms_db = breath_probabilities(path, det)
     finally:
         det.close()
-    intervals = detect(probs, rms_db)
+    intervals = detect(probs, rms_db, threshold)
 
     total = sum(b - a for a, b, _ in intervals)
     pct = (100.0 * total / duration) if duration else 0.0
@@ -96,17 +96,21 @@ def main():
                     help="process every supported file in a folder, recursively")
     ap.add_argument("-v", "--verbose", action="store_true",
                     help="show every breath region")
-    ap.add_argument("-l", type=float, default=GAIN_DB, metavar="DB",
+    ap.add_argument("-l", "--gain", type=float, default=GAIN_DB, metavar="DB",
                     help="breath attenuation in dB (default %(default)s)")
+    ap.add_argument("-t", "--threshold", type=float, default=THRESHOLD, metavar="P",
+                    help="breath detection threshold 0..1 (default %(default)s); higher = stricter")
     args = ap.parse_args()
-    gain_db = abs(args.l)
+    gain_db = abs(args.gain)
+    if not 0.0 <= args.threshold <= 1.0:
+        raise SystemExit("error: -t/--threshold must be between 0 and 1")
     ffmpeg()
 
     path = os.path.abspath(args.input)
     if not args.recursive:
         if not os.path.isfile(path):
             raise SystemExit("error: input not found: %s" % path)
-        run_file(path, gain_db, args.verbose, detail=True)
+        run_file(path, gain_db, args.verbose, detail=True, threshold=args.threshold)
         return
 
     if not os.path.isdir(path):
@@ -122,7 +126,7 @@ def main():
     for i, item in enumerate(inputs, 1):
         print("[%d/%d] %s" % (i, len(inputs), item))
         try:
-            stats = run_file(item, gain_db, args.verbose, detail=args.verbose)
+            stats = run_file(item, gain_db, args.verbose, detail=args.verbose, threshold=args.threshold)
             processed += 1
             breaths += stats["breaths"]
             removed += stats["removed"]

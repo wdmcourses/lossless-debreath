@@ -105,9 +105,9 @@ def merge_intervals(intervals, gap):
     return out
 
 
-def detect(probs, rms_db):
+def detect(probs, rms_db, threshold=THRESHOLD):
     frame_s = HOP / float(SR)
-    pred = np.where(probs > THRESHOLD)[0]
+    pred = np.where(probs > threshold)[0]
     runs = []
     i = 0
     while i < len(pred):

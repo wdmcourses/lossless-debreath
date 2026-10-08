@@ -48,6 +48,12 @@ To change how much the breaths are lowered:
 debreath interview.mov -l 20
 ```
 
+To also catch weaker breaths (less strict detection):
+
+```
+debreath interview.mov -t 0.5
+```
+
 To process a whole folder (unsupported files are skipped):
 
 ```
@@ -56,9 +62,10 @@ debreath -r recordings/
 
 | Option | Default | Meaning |
 | --- | --- | --- |
-| `-r` | off | Process every supported file in a folder, recursively. |
-| `-v` | off | Print every detected breath region. |
-| `-l DB` | `30` | How much to lower the breaths, in dB. |
+| `-r, --recursive` | off | Process every supported file in a folder, recursively. |
+| `-v, --verbose` | off | Print every detected breath region. |
+| `-l, --gain DB` | `30` | How much to lower the breaths, in dB. |
+| `-t, --threshold P` | `0.9` | Breath detection threshold (0–1). Higher = stricter, fewer detections. |
 
 ## Building
 
