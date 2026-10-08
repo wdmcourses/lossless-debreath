@@ -31,11 +31,18 @@ def pick_output_ext(vcodec, acodec, src_ext):
     return ".mkv"
 
 
+def _same_dir(a, b):
+    try:
+        return os.path.samefile(a, b)
+    except OSError:
+        return os.path.normcase(os.path.realpath(a)) == os.path.normcase(os.path.realpath(b))
+
+
 def default_output(path, vcodec, acodec, out_dir=None):
     out_dir = os.path.abspath(out_dir) if out_dir else os.getcwd()
     src_dir = os.path.dirname(os.path.abspath(path))
     root, ext = os.path.splitext(os.path.basename(path))
-    suffix = "_debreath" if os.path.normcase(src_dir) == os.path.normcase(out_dir) else ""
+    suffix = "_debreath" if _same_dir(src_dir, out_dir) else ""
     return os.path.join(out_dir, root + suffix + pick_output_ext(vcodec, acodec, ext))
 
 
