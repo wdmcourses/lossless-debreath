@@ -5,7 +5,7 @@ Remove breaths (inhalations) from audio and video. The video is copied as-is; on
 ## What it does
 
 - Finds the breaths automatically.
-- Lowers each breath by 30 dB (or your value with `-l`).
+- Lowers each breath by 60 dB (or your value with `-l`).
 - Copies the video as-is and re-encodes only the breaths.
 - Keeps the original container and codec.
 
@@ -64,7 +64,7 @@ debreath -r recordings/
 | --- | --- | --- |
 | `-r, --recursive` | off | Process every supported file in a folder, recursively. |
 | `-v, --verbose` | off | Print every detected breath region. |
-| `-l, --gain DB` | `30` | How much to lower the breaths, in dB. |
+| `-l, --gain DB` | `60` | How much to lower the breaths, in dB. |
 | `-t, --threshold P` | `0.5` | Breath detection threshold (0–1). Higher = softer, leaves more untouched. |
 
 ## Building
