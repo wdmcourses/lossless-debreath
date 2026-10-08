@@ -99,7 +99,7 @@ def main():
     ap.add_argument("-l", "--gain", type=float, default=GAIN_DB, metavar="DB",
                     help="breath attenuation in dB (default %(default)s)")
     ap.add_argument("-t", "--threshold", type=float, default=THRESHOLD, metavar="P",
-                    help="breath detection threshold 0..1 (default %(default)s); higher = stricter")
+                    help="breath detection threshold 0..1 (default %(default)s); higher = softer, leaves more untouched")
     args = ap.parse_args()
     gain_db = abs(args.gain)
     if not 0.0 <= args.threshold <= 1.0:

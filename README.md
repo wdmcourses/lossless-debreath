@@ -48,7 +48,7 @@ To change how much the breaths are lowered:
 debreath interview.mov -l 20
 ```
 
-To also catch weaker breaths (less strict detection):
+To make the detection more sensitive (lower threshold, wider regions):
 
 ```
 debreath interview.mov -t 0.5
@@ -65,7 +65,7 @@ debreath -r recordings/
 | `-r, --recursive` | off | Process every supported file in a folder, recursively. |
 | `-v, --verbose` | off | Print every detected breath region. |
 | `-l, --gain DB` | `30` | How much to lower the breaths, in dB. |
-| `-t, --threshold P` | `0.9` | Breath detection threshold (0–1). Higher = stricter, fewer detections. |
+| `-t, --threshold P` | `0.9` | Breath detection threshold (0–1). Higher = softer, leaves more untouched. |
 
 ## Building
 
