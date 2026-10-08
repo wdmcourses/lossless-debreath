@@ -65,7 +65,7 @@ debreath -r recordings/
 | `-r, --recursive` | off | Process every supported file in a folder, recursively. |
 | `-v, --verbose` | off | Print every detected breath region. |
 | `-l, --gain DB` | `30` | How much to lower the breaths, in dB. |
-| `-t, --threshold P` | `0.9` | Breath detection threshold (0–1). Higher = softer, leaves more untouched. |
+| `-t, --threshold P` | `0.5` | Breath detection threshold (0–1). Higher = softer, leaves more untouched. |
 
 ## Building
 
