@@ -66,7 +66,7 @@ system Python or FFmpeg is needed.
 Assemble the portable builds (runtimes are already bundled):
 
 ```
-python scripts/pack.py                 # all platforms
+python scripts/pack.py
 python scripts/pack.py --platform linux-x64
 ```
 
