@@ -2,8 +2,6 @@
 
 Remove breaths (inhalations) from audio and video. The video is copied as-is; only the breaths are made quieter.
 
-[Download (zip)](https://github.com/wdmcourses/lossless-debreath/archive/refs/heads/main.zip)
-
 ## What it does
 
 - Finds the breaths automatically.
