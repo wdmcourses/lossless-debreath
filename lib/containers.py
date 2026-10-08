@@ -31,10 +31,12 @@ def pick_output_ext(vcodec, acodec, src_ext):
     return ".mkv"
 
 
-def default_output(path, vcodec, acodec):
+def default_output(path, vcodec, acodec, out_dir=None):
+    out_dir = os.path.abspath(out_dir) if out_dir else os.getcwd()
+    src_dir = os.path.dirname(os.path.abspath(path))
     root, ext = os.path.splitext(os.path.basename(path))
-    name = root + "_debreath" + pick_output_ext(vcodec, acodec, ext)
-    return os.path.join(os.getcwd(), name)
+    suffix = "_debreath" if os.path.normcase(src_dir) == os.path.normcase(out_dir) else ""
+    return os.path.join(out_dir, root + suffix + pick_output_ext(vcodec, acodec, ext))
 
 
 def unique_output(path):

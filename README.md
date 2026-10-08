@@ -38,7 +38,9 @@ debreath <file>
 debreath -r <folder>
 ```
 
-The result is saved in the current folder as `<name>_debreath.<ext>`.
+The result is saved in the current folder. If the source is in the current folder too,
+`_debreath` is added to the name (`<name>_debreath.<ext>`) so the original is not
+overwritten; when the source is in another folder, the name is kept as-is.
 
 To change how much the breaths are lowered:
 
